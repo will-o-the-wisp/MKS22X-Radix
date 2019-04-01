@@ -2,7 +2,11 @@ public class MyLinkedList{
   private int length;
   private Node start,end;
   public MyLinkedList(){
+  }
+  public void clear(){
     length = 0;
+    start = null;
+    end = null;
   }
   public int size(){
     return length;
