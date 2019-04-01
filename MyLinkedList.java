@@ -27,7 +27,7 @@ public class MyLinkedList<E>{
     return true;
   }
   public E removeFront(){
-    if(size==0){
+    if(size()==0){
       throw new NoSuchElementException("size is 0");
     }
     return remove(0);
@@ -100,6 +100,10 @@ public class MyLinkedList<E>{
       ans++;
     }
     return -1;
+  }
+  public boolean addFront(E value){
+    add(0,value);
+    return true;
   }
   public void add(int index, E value){
     if(index < 0 || index > size()){

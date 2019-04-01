@@ -1,3 +1,4 @@
+import java.util.*;
 public class Radix{
   public static void radixsort(int[] data){
     if(data.length==0){
@@ -10,5 +11,10 @@ public class Radix{
       }
     }
     int maxd = (int)Math.log10(Math.abs(max))+1;
+    ArrayList<MyLinkedList<Integer>> buckets = new ArrayList<MyLinkedList<Integer>>();
+    for(int i=0;i<10;i++){
+      buckets.add(new MyLinkedList<Integer>());
+    }
+    
   }
 }
