@@ -1,6 +1,6 @@
-public class MyLinkedList{
+public class MyLinkedList<E>{
   private int length;
-  private Node start,end;
+  private Node<E> start,end;
   public MyLinkedList(){
   }
   public void clear(){
@@ -11,14 +11,14 @@ public class MyLinkedList{
   public int size(){
     return length;
   }
-  public boolean add(Integer value){
+  public boolean add(E value){
     if(size()>0){
-      Node newend = new Node(value, end, null);
+      Node<E> newend = new Node<E>(value, end, null);
       end.setNext(newend);
       end = newend;
     }
     else{
-      Node n = new Node(value, null, null);
+      Node<E> n = new Node<E>(value, null, null);
       start = n;
       end = n;
     }
@@ -28,7 +28,7 @@ public class MyLinkedList{
   public String toString(){
     String ans="[";
     if(size()>0){
-      Node current=start;
+      Node<E> current=start;
       for(int i=0;i<length-1;i++){
         ans+=current.getData()+", ";
         current = current.next();
@@ -40,7 +40,7 @@ public class MyLinkedList{
   public String reverse(){
     String ans="[";
     if(size()>0){
-      Node current=end;
+      Node<E> current=end;
       for(int i=length;i>1;i--){
         ans+=current.getData()+", ";
         current = current.prev();
@@ -49,14 +49,14 @@ public class MyLinkedList{
     }
     return ans+"]";
   }
-  private Node getNthNode(int n){
-    Node current = start;
+  private Node<E> getNthNode(int n){
+    Node<E> current = start;
     for(int i=0;i<n;i++){
       current = current.next();
     }
     return current;
   }
-  public Integer get(int index){
+  public E get(int index){
     if (index < 0 || index >= size()){
       throw new IndexOutOfBoundsException("Index out of range");
     }
@@ -64,7 +64,7 @@ public class MyLinkedList{
       return getNthNode(index).getData();
     }
   }
-  public Integer set(int index, Integer value){
+  public E set(int index, E value){
     if (index < 0 || index >= size()){
       throw new IndexOutOfBoundsException("Index out of range");
     }
@@ -72,8 +72,8 @@ public class MyLinkedList{
       return getNthNode(index).setData(value);
     }
   }
-  public boolean contains(Integer value){
-    Node current = start;
+  public boolean contains(E value){
+    Node<E> current = start;
     for(int i=0;i<length;i++){
       if(current.getData()==value){
         return true;
@@ -82,11 +82,11 @@ public class MyLinkedList{
     }
     return false;
   }
-  public int indexOf(Integer value){
+  public int indexOf(E value){
     int ans=0;
-    Node current=start;
+    Node<E> current=start;
     for(int i=0;i<length;i++){
-      if((int)(current.getData())==(int)value){
+      if(current.getData().equals(value)){
         return ans;
       }
       current=current.next();
@@ -94,41 +94,41 @@ public class MyLinkedList{
     }
     return -1;
   }
-  public void add(int index, Integer value){
+  public void add(int index, E value){
     if(index < 0 || index > size()){
       throw new IndexOutOfBoundsException("Index out of bounds");
     }
     else{
       if(size()==0){
-        Node n = new Node(value, null, null);
+        Node<E> n = new Node<E>(value, null, null);
         start = n;
         end = n;
       }
       else if(index == size()){
-        Node newend = new Node(value, end, null);
+        Node<E> newend = new Node<E>(value, end, null);
         end.setNext(newend);
         end = newend;
       }
       else if(index == 0){
-        Node newstart = new Node(value, null, start);
+        Node<E> newstart = new Node<E>(value, null, start);
         start.setPrev(newstart);
         start = newstart;
       }
       else{
-        Node prev = getNthNode(index-1);
-        Node n = new Node(value, prev, prev.next());
+        Node<E> prev = getNthNode(index-1);
+        Node<E> n = new Node<E>(value, prev, prev.next());
         prev.setNext(n);
         n.next().setPrev(n);
       }
       length++;
     }
   }
-  public Integer remove(int index){
+  public E remove(int index){
     if(index < 0 || index >= size()){
       throw new IndexOutOfBoundsException("index out of bounds");
     }
     else{
-      int ans;
+      E ans;
       if(index == size()-1){
         ans=end.getData();
         end=end.prev();
@@ -140,7 +140,7 @@ public class MyLinkedList{
         start.setPrev(null);
       }
       else{
-        Node n = getNthNode(index);
+        Node<E> n = getNthNode(index);
         ans=n.getData();
         n.prev().setNext(n.next());
         n.next().setPrev(n.prev());
@@ -149,7 +149,7 @@ public class MyLinkedList{
       return ans;
     }
   }
-  public boolean remove(Integer value){
+  public boolean remove(E value){
     int i = indexOf(value);
     if(i==-1){
       return false;
@@ -170,32 +170,32 @@ public class MyLinkedList{
   }
 }
 
-class Node{
-  private Integer data;
-  private Node prev, next;
-  public Node(int _data, Node _prev, Node _next){
+class Node<E>{
+  private E data;
+  private Node<E> prev, next;
+  public Node(E _data, Node<E> _prev, Node<E> _next){
     data = _data;
     prev = _prev;
     next = _next;
   }
-  public Integer getData(){
+  public E getData(){
     return data;
   }
-  public Integer setData(Integer i){
-    Integer old = data;
+  public E setData(E i){
+    E old = data;
     data = i;
     return old;
   }
-  public Node next(){
+  public Node<E> next(){
     return next;
   }
-  public Node prev(){
+  public Node<E> prev(){
     return prev;
   }
-  public void setPrev(Node _prev){
+  public void setPrev(Node<E> _prev){
     prev = _prev;
   }
-  public void setNext(Node _next){
+  public void setNext(Node<E> _next){
     next = _next;
   }
   public String toString(){

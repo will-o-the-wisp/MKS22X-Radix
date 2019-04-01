@@ -7,8 +7,8 @@ public class LLDriver{
         System.out.println("######################");
         System.out.println("##New Instance Test:##");
         System.out.println("######################");
-        MyLinkedList list = new MyLinkedList();
-        MyLinkedList list2 = new MyLinkedList();
+        MyLinkedList<Integer> list = new MyLinkedList<Integer>();
+        MyLinkedList<Integer> list2 = new MyLinkedList<Integer>();
         list2.add(5);
         list2.add(7);
         list2.add(100);
