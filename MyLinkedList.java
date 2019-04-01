@@ -1,3 +1,4 @@
+import java.util.*;
 public class MyLinkedList<E>{
   private int length;
   private Node<E> start,end;
@@ -24,6 +25,12 @@ public class MyLinkedList<E>{
     }
     length++;
     return true;
+  }
+  public E removeFront(){
+    if(size==0){
+      throw new NoSuchElementException("size is 0");
+    }
+    return remove(0);
   }
   public String toString(){
     String ans="[";
