@@ -1,7 +1,7 @@
 import java.util.*;
 public class Radix{
   public static void main(String[] args){
-    int[] data = {11,32,35,50,99};
+    int[] data = {11,50,7,51,99,80};
     radixsort(data);
     System.out.println(ats(data));
   }
@@ -24,22 +24,30 @@ public class Radix{
       int d = data[i]%10;
       buckets[d].add(data[i]);
     }
-    for(int j=0;j<maxd;j++){
+    printBuckets(buckets);
+    for(int j=1;j<maxd+1;j++){
       MyLinkedList<Integer> chain = new MyLinkedList<Integer>();
       for(int i=0;i<buckets.length;i++){
         chain.extend(buckets[i]);
       }
-      for(int i=0;i<chain.size();i++){
-        int d = (data[i]/(int)Math.pow(10,j))%10;
+      System.out.println(chain);
+      for(int i=0;i<data.length;i++){
+        int d = (chain.get(0)/(int)Math.pow(10,j))%10;
+        System.out.println(d);
         buckets[d].add(chain.removeFront());
       }
+      printBuckets(buckets);
     }
-    printBuckets(buckets);
+    for(int i=0;i<data.length;i++){
+      data[i]=buckets[0].removeFront();
+    }
   }
   private static void printBuckets(MyLinkedList<Integer>[] b){
+    String a = "";
     for(int i=0;i<b.length;i++){
-      System.out.println(b[i]);
+      a+=b[i]+" ";
     }
+    System.out.println(a);
   }
   private static String ats(int[] a){
     String ans="";

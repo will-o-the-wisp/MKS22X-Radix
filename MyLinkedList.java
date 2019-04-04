@@ -26,12 +26,6 @@ public class MyLinkedList<E>{
     length++;
     return true;
   }
-  public E removeFront(){
-    if(size()==0){
-      throw new NoSuchElementException("size is 0");
-    }
-    return remove(0);
-  }
   public String toString(){
     String ans="[";
     if(size()>0){
@@ -134,21 +128,32 @@ public class MyLinkedList<E>{
       length++;
     }
   }
+  public E removeFront(){
+    if(size()==0){
+      throw new NoSuchElementException("size is 0");
+    }
+    return remove(0);
+  }
   public E remove(int index){
     if(index < 0 || index >= size()){
       throw new IndexOutOfBoundsException("index out of bounds");
     }
     else{
       E ans;
-      if(index == size()-1){
-        ans=end.getData();
-        end=end.prev();
-        end.setNext(null);
+      if(size()==1){
+        ans=start.getData();
+        start=null;
+        end=null;
       }
       else if(index == 0){
         ans=start.getData();
         start=start.next();
         start.setPrev(null);
+      }
+      else if(index == size()-1){
+        ans=end.getData();
+        end=end.prev();
+        end.setNext(null);
       }
       else{
         Node<E> n = getNthNode(index);
