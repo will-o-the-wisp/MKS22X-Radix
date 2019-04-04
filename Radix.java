@@ -24,19 +24,15 @@ public class Radix{
       int d = data[i]%10;
       buckets[d].add(data[i]);
     }
-    printBuckets(buckets);
     for(int j=1;j<maxd+1;j++){
       MyLinkedList<Integer> chain = new MyLinkedList<Integer>();
       for(int i=0;i<buckets.length;i++){
         chain.extend(buckets[i]);
       }
-      System.out.println(chain);
       for(int i=0;i<data.length;i++){
         int d = (chain.get(0)/(int)Math.pow(10,j))%10;
-        System.out.println(d);
         buckets[d].add(chain.removeFront());
       }
-      printBuckets(buckets);
     }
     for(int i=0;i<data.length;i++){
       data[i]=buckets[0].removeFront();
